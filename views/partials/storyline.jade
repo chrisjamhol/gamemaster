@@ -1,0 +1,4 @@
+h2 Storyline
+section.storylinewrapper(ng-controller="storylineController")
+	ul
+		li(ng-repeat="story in getStoryline()") {{story.title}} - {{story.text}}
