@@ -1,32 +1,25 @@
-'use strict';
+var usermail = "chrisjamhol@gmail.com";
 
-// Declare app level module which depends on filters, and services
-var gamemasterApp = angular.module('gamemasterApp', []).  //'myApp.filters', 'myApp.services', 'myApp.directives'
-    config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-      $routeProvider.
-        when('/', {
-          templateUrl: 'partials/index',
-          controller: IndexCtrl
-        }).
-        /*when('/addPost', {
-          templateUrl: 'partials/addPost',
-          controller: AddPostCtrl
-        }).
-        when('/readPost/:id', {
-          templateUrl: 'partials/readPost',
-          controller: ReadPostCtrl
-        }).
-        when('/editPost/:id', {
-          templateUrl: 'partials/editPost',
-          controller: EditPostCtrl
-        }).
-        when('/deletePost/:id', {
-          templateUrl: 'partials/deletePost',
-          controller: DeletePostCtrl
-        }).*/
-        otherwise({
-          redirectTo: '/'
-        });
-      $locationProvider.html5Mode(true);
-    }]);
-
+var gamemasterApp = angular.module('gamemasterApp', ['ui.router'])
+    .config(['$stateProvider','$urlRouterProvider',
+        function($stateProvider, $urlRouterProvider){
+            $stateProvider
+                .state('home',{
+                    url: "/",
+                    templateUrl: "index",
+                    controller: 'IndexController'
+                })
+                .state('storyline',{
+                    url: "/storyline",
+                    templateUrl: "partials/storyline",
+                    controller: 'storylineController'
+                })
+                .state('storyline.encounter',{
+                    url: "/encounter",
+                    //template: '<h1>hi</h1>',
+                    templateUrl: "partials/storyline_encounter",
+                    controller: 'encounterController',
+                    onEnter: function(){console.log("entered state");}
+                });
+        }
+    ]);
