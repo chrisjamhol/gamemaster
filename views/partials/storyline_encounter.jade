@@ -1,0 +1,9 @@
+section.encounterdata
+	h2 Encounterdata
+	h4 {{encounterdata.heading}}
+	p {{encounterdata.description}}
+	h4 Rewards:
+	ul
+		li xp: {{encounterdata.rewards.xp}}
+		ul
+			li(data-ng-repeat="loot in encounterdata.rewards.loot") {{loot}}

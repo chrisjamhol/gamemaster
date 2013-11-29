@@ -1,0 +1,13 @@
+/** user indexes **/
+db.getCollection("user").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** user records **/
+db.getCollection("user").insert({
+  "_id": ObjectId("52946cca4f2055268c1780fb"),
+  "name": "Chris",
+  "mail": "chrisjamhol@gmail.com"
+});

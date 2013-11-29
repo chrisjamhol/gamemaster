@@ -1,0 +1,14 @@
+/** storypoint indexes **/
+db.getCollection("storypoint").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** storypoint records **/
+db.getCollection("storypoint").insert({
+  "_id": ObjectId("529474abba18729d8474cd33"),
+  "typ": "main",
+  "userId": ObjectId("52946cca4f2055268c1780fb"),
+  "order": 0
+});
