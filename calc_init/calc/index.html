@@ -1,0 +1,89 @@
+<html data-ng-app="calcApp">
+<head>
+	<title>Calc</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../public/css/pure.css">
+	<style>
+		ul{list-style: none;}
+		.main{margin: 15px;}
+		.attackInput{margin-left: 10px;}
+		.button-small{font-size: 80%;}
+		.clear{clear: both;}
+		.enc{
+			display: none;
+		}
+		.foe{
+			background-color: lightgray;
+			float:left;
+			margin-right: 20px;
+			margin-top: 20px;
+			padding: 5px
+		}
+		.foeData{margin-left: 20px;}
+		.foeAttacks,.foeAttack,.loot{
+			margin-top: 2px;
+			margin-bottom: 2px;
+		}
+		.attrTable{
+			background-color: white;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<section class="main" data-ng-controller="calcController">
+		<h2>Calc</h2>
+		<ul data-ng-repeat="encounter in encounters" data-ng-init="encounterIndex = $index">
+			<li>
+				<h4 data-fold class="encNameHeading_{{encounter.name}}">{{encounter.name}}</h4>
+				<div class="enc">
+					<p>{{encounter.story}}</p>
+					<p>Foes:</p>
+					<ul class="foes" data-ng-repeat="foe in encounter.foes" data-ng-show="foe.alive">
+						<li class="foe">
+							<strong>{{foe.name}}</strong>
+							<div class="foeData">
+								Health: <strong>{{foe.hp}}:</strong> {{foe.currentHp}}
+									<input class="attackInpu" ng-model="attackInputs[encounterIndex+'_'+$index]" type="text" size="3" />
+									<button class="pure-button button-small" data-ng-click="attack(encounterIndex,$index,foe)">attack</button><br />
+								Defense: {{foe.def}}<br />
+								Armor: {{foe.armor}}<br />
+								Speed: {{foe.speed}}<br />
+								Attacks:
+								<ul class="foeAttacks" data-ng-repeat="attack in foe.attacks">
+									<li class="foeAttack">{{attack.name}}: {{attack.value}}</li>
+								</ul>
+								<span data-foldtable>Attributes:
+								<table class="pure-table attrTable" >
+									<thead>
+										<tr>
+											<th>point</th>
+											<th>Attr</th>
+										</tr>
+									</thead>
+									<tbody data-ng-repeat="(key,val) in foe.attrs">
+										<tr>
+											<td>{{key}}</td>
+											<td>{{val}}</td>
+										</tr>
+									</tbody>
+								</table>
+								</span>
+							</div>
+						</li>
+					</ul>
+					<div class="clear"></div>
+					<p>Xp: {{encounter.xp}}</p>
+					<p>Loot:</p>
+					<ul class="loot" data-ng-repeat="item in encounter.loot">
+						<li class="">{{item}}</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<script src="jquery.js"></script>
+	<script src="../../public/js/lib/angular/angular.min.js"></script>
+	<script src="calc.js"></script>
+</body>
+</html>

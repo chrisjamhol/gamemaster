@@ -1,0 +1,34 @@
+<html data-ng-app="initApp">
+<head>
+	<title>Initiative</title>
+	<link rel="stylesheet" href="../../public/css/pure.css">
+	<style>
+		.main{
+			margin: 15px;
+		}
+	</style>
+</head>
+<body>
+	<section class="main" data-ng-controller="initController">
+		<h2>Initiative</h2>
+		<button class="pure-button" data-ng-click="reset()">clear</button><br />
+		<input id="newPlayerRoll" type="text" data-ng-model="newPlayer.roll" size="2">
+		<input id="newPlayerName" type="text" data-ng-model="newPlayer.name"/>
+		<button class="pure-button" data-ng-click="addPlayer()">add</button>
+		<ol class="pure-menu" data-ng-if='player !== "undefined"' data-ng-repeat="player in players | toArray | orderBy:'roll':reverse">
+			<li>
+				{{player.roll}} {{player.name}}
+				<button class="pure-button" data-ng-click='showEdit(player.roll,player.name)'>edit</button>
+				<button class="pure-button" data-ng-click="deletePlayer(player)">kill</button>
+				<div id="edit_{{player.roll}}_{{player.name}}" style="display:none;">
+					<input type="text" data-ng-model="player.roll" size="2" value="{{player.roll}}"/>
+					<input type="text" data-ng-model="player.name" value="{{player.name}}"/>
+					<button class="pure-button" data-ng-click="hideEdit(player.roll,player.name)">edit</button>
+				</div>
+			</li>
+		</ol>
+	</section>
+	<script src="../../public/js/lib/angular/angular.min.js"></script>
+	<script src="init.js"></script>
+</body>
+</html>
