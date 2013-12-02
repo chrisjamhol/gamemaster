@@ -132,21 +132,23 @@ var calcApp = angular.module('calcApp', [])
 							}
 						},
 					xp: 50,
-					loot: ["5g","Ring der Genauhigkeit (attrroll +3)","orghaut (grob)"],
+					loot: ["5g","Ring der Genauhigkeit (attrroll +3)","orghaut (grob)","storyxp 50"],
 					story: "Der gigantische Org sitzt in der Ecke und bemerkt die Reisenede wärend er sich eine Rattensuppe kocht"
-				}
+				},
 			"2": {
 					name: "Verschwindenden Tiere (Nacht)",
 					foes: {
 							"0": {
-								name: "gigantischer org",
-								hp: 90,
-								currentHp: 90,
-								def: 10,
-								armor: 5,
+								name: "Monster",
+								hp: 45,
+								currentHp: 45,
+								def: 13,
+								armor: 0,
 								attacks: [
-									{name:"Keule", value:"2d6"},
-									{name:"Schrei", value: "stunn all if !TN13-Willpower"}
+									{name:"Blitz", value:"2d6 - 2"},
+									{name:"Giftnebel", value: "1d6 area 10 yard"},
+									{name:"Schaframmbock", value: "1d6"},
+									{name:"Rückzug", value:"move 30 yards"}
 								],
 								attrs: {
 									'Commun':-1,
@@ -162,10 +164,87 @@ var calcApp = angular.module('calcApp', [])
 							}
 						},
 					xp: 50,
-					loot: ["5g","Ring der Genauhigkeit (attrroll +3)","orghaut (grob)"],
-					story: "Es ist Nacht. Ihr wartet in den Büschen und beobachtet das Feld. Nach einiger Zeit seht ihr ein Kind mit einer Flöte. Es spielt"+
-							"eine angsteinflösende Melodie welche die Tiere zunächst aufschreckt."
-				}
+					loot: ["28 silber","Ring der Wahnsinns (strength -1, willpower +2)","storyxp 50"],
+					story: "Es ist Nacht. Ihr wartet in den Büschen und beobachtet das Feld. Nach einiger Zeit seht ihr ein Kind mit einer Flöte. Es spielt "+
+							"eine angsteinflösende Melodie welche die Tiere zunächst aufschreckt. Doch nach im nächsten Moment sind sie völlig ruhig "+
+							"Sie laufen nun in Richtung ausgang des Gatters. <? Was tun ?> "+
+							"Motive: Hunger, viel Hunger "+
+							"Das Kind verwandelt sich in eien ausgewachenes Monster! "+
+							"Result: Flöte verschwindet mit Monster"
+				},
+			"3": {
+				name: "Der Dieb",
+					foes: {
+							"0": {
+								name: "Dieb",
+								hp: 45,
+								currentHp: 45,
+								def: 16,
+								armor: 1,
+								attacks: [
+									{name:"Stab", value:"2d6"},
+									{name:"Nakosegift", value: "1d6 TN12-Willpower 10 yard"},
+									{name:"Wurfmesser", value: "1d6 20 yard"}
+								],
+								attrs: {
+									'Commun': 4,
+									'Const': 2,
+									'Cunning': 2,
+									'Dext': 2,
+									'Magic': 0,
+									'Percep': 3,
+									'Strenght': 1,
+									'Willpow': 1
+								},
+								alive: true
+							},
+							"1": {
+								name: "Helfer 1",
+								hp: 20,
+								currentHp: 20,
+								def: 13,
+								armor: 0,
+								attacks: [
+									{name:"Stab", value:"1d6"}
+								],
+								attrs: {
+									'Commun': 4,
+									'Const': 2,
+									'Cunning': 2,
+									'Dext': 2,
+									'Magic': 0,
+									'Percep': 3,
+									'Strenght': 1,
+									'Willpow': 1
+								},
+								alive: true
+							},
+							"2": {
+								name: "Helfer 1",
+								hp: 20,
+								currentHp: 20,
+								def: 13,
+								armor: 0,
+								attacks: [
+									{name:"Stab", value:"1d6"}
+								],
+								attrs: {
+									'Commun': 4,
+									'Const': 2,
+									'Cunning': 2,
+									'Dext': 2,
+									'Magic': 0,
+									'Percep': 3,
+									'Strenght': 1,
+									'Willpow': 1
+								},
+								alive: true
+							}
+						},
+					xp: 50,
+					loot: ["1 gold","storyxp 50"],
+					story: ""
+			}
 		};
 
 		$scope.attack = function(encIndex,foeIndex,foe){
