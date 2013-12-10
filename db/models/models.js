@@ -1,5 +1,5 @@
 var Models = function(mongoose){
-	/** Schemas **/
+/** Schemas **/
 	var userSchema = mongoose.Schema({
 			mail: String
 		});
@@ -30,6 +30,7 @@ var Models = function(mongoose){
 	var storyPointSchema = mongoose.Schema({
 				data:
 					{
+						name: String,
 						story: String,
 						xp: Number,
 						loot: [String]
@@ -47,15 +48,15 @@ var Models = function(mongoose){
 					}
 			});
 
-	/** Schema Functions **/
+/** Schema Functions **/
 	userSchema.statics = {
 			load: function(id,callback){
 				this.findOne({_id: id}).exec(callback);
 			}
 		}
 
-	var User = mongoose.model('User',userSchema);
-	var Foe = mongoose.model('Foe',foeSchema);
-	var StoryPoint = mongoose.model('StoryPoint',storyPointSchema);
+	this.User = mongoose.model('User',userSchema);
+	this.Foe = mongoose.model('Foe',foeSchema);
+	this.StoryPoint = mongoose.model('StoryPoint',storyPointSchema);
 }
 exports.do = function(mongoose){return new Models(mongoose);}

@@ -2,10 +2,7 @@
 gamemasterApp.controller('IndexController',
     ['$scope', '$http',
         function($scope,$http) {
-            /*$http.get('/api/posts').
-                success(function(data, status, headers, config) {
-                    $scope.posts = data.posts;
-            });*/
+
         }
     ]
 );
@@ -26,21 +23,21 @@ gamemasterApp.controller('storylineController',
                 "1": {title:"secon Encount", text: "the second encounter", link: "storyline.encounter?1"},
                 "2": {title:"third Encount", text: "the third encounter", link: "storyline.encounter?2"}
             };
-            $scope.getStoryline = function getStoryline(){
-                var userIdTmp = '52a473a7f54eeca012000002';
-                var userId = userIdTmp;
-                $http.get('/api/getStoryline/'+userId)
-                    .success(function(data, status, headers, config){
-                        console.log(status);
-                        console.log(data);
-                    })
-                    .error(function(data, status, headers, config){
-                        console.log("error");
-                        console.log("status: "+status);
-                        console.log("data:"+data);
-                     });
-                return storylineObj;
-            }
+
+            $http.get('/api/getStoryline/52a1bc7b8177ae7018000001')
+                .success(function(data, status, headers, config){
+                    console.log(status);
+                    console.log(data);
+                    $scope.storylines = data;
+                })
+                .error(function(data, status, headers, config){
+                    console.log("error");
+                    console.log("status: "+status);
+                    console.log("data:"+data);
+                 });
+
+
+
         }
     ]);
 

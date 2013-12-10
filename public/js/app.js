@@ -4,7 +4,7 @@ var gamemasterApp = angular.module('gamemasterApp', ['ui.router'])
     .config(['$stateProvider','$urlRouterProvider',
         function($stateProvider, $urlRouterProvider){
             $stateProvider
-                .state('login',{                    
+                .state('login',{
                     url: "/login",
                     templateUrl: "index",
                     controller: 'LoginController',
@@ -13,7 +13,8 @@ var gamemasterApp = angular.module('gamemasterApp', ['ui.router'])
                 .state('home',{
                     url: "/home",
                     templateUrl: "index",
-                    controller: 'IndexController'
+                    controller: 'IndexController',
+                    onEnter: function(){console.log("entered index controller scope");}
                 })
                 .state('storyline',{
                     url: "/storyline",

@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/gamemaster');
 var db = require('./db/mongo.js').init(mongoose);
@@ -11,6 +6,7 @@ var db = require('./db/mongo.js').init(mongoose);
 db.addStoryPoint(
     {
         data: {
+            name: "storypoitn name",
             story: "tblakjlsdk olidkfj sdf",
             xp: 100,
             loot: ["item1dsfsdfsdf","itemdsfsd2"]
@@ -28,8 +24,8 @@ db.addStoryPoint(
 */
 
 var express = require('express'),
-  routes = require('./routes'),
-  api = require('./routes/api');
+  routes = require('./routes/routes.js'),
+  api = require('./api/api.js');
 
 api.setDb(db);
 

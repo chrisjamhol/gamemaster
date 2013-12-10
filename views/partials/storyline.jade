@@ -2,6 +2,9 @@ section.pure-u-1-2
 	h2 Storyline
 	section.storylinewrapper
 		ul
-			li(data-ng-repeat="story in getStoryline()") {{story.title}} - {{story.text}}:
-				a(ui-sref='.encounter') {{story.link}}
+			li(data-ng-repeat="story in storylines")
+				div
+					h3 {{story.data.name}}
+					p {{story.data.story}}:
+					a(ui-sref='.encounter') {{story.link}}
 section.pure-u-1-2(data-ui-view="")

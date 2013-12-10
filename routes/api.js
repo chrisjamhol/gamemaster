@@ -5,9 +5,10 @@ exports.setDb = function(dbP){db = dbP;console.log(db);}
 exports.getStoryline = function(req,res){
     console.log(req.params.userid);
     db.getStoryline(req.params.userid,function(storyline){
-        console.log(storyline); 
+        console.log(JSON.stringify(storyline));
         //res.json({text: "hi"});
-        res.json(storyline); 
+        res.writeHead(200, { 'Content-Type': 'application/json'});
+        res.end(JSON.stringify(storyline));
     });
 }
 
