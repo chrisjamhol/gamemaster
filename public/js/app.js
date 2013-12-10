@@ -4,8 +4,14 @@ var gamemasterApp = angular.module('gamemasterApp', ['ui.router'])
     .config(['$stateProvider','$urlRouterProvider',
         function($stateProvider, $urlRouterProvider){
             $stateProvider
+                .state('login',{                    
+                    url: "/login",
+                    templateUrl: "index",
+                    controller: 'LoginController',
+                    onEnter: function(){console.log("entering login");}
+                })
                 .state('home',{
-                    url: "/",
+                    url: "/home",
                     templateUrl: "index",
                     controller: 'IndexController'
                 })

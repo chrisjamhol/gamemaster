@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/gamemaster');
 var db = require('./db/mongo.js').init(mongoose);
 //db.addUser('chrisjamhol@gmail.com',function(user){console.log(user);});
-
 /*
 db.addStoryPoint(
     {
@@ -31,6 +30,8 @@ db.addStoryPoint(
 var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api');
+
+api.setDb(db);
 
 var app = module.exports = express.createServer();
 
@@ -63,7 +64,7 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
-
+app.get('/api/getstoryline/:userid',api.getStoryline);
 app.get('/api/posts', api.posts);
 
 app.get('/api/post/:id', api.post);

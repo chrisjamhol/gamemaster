@@ -1,21 +1,15 @@
-/*
- * Serve JSON to our AngularJS client
- */
+var db = null;
 
-// For a real app, you'd make database requests here.
-// For this example, "data" acts like an in-memory "database"
-var data = {
-  "posts": [
-    {
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      "title": "Sed egestas",
-      "text": "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus."
-    }
-  ]
-};
+exports.setDb = function(dbP){db = dbP;console.log(db);}
+
+exports.getStoryline = function(req,res){
+    console.log(req.params.userid);
+    db.getStoryline(req.params.userid,function(storyline){
+        console.log(storyline); 
+        //res.json({text: "hi"});
+        res.json(storyline); 
+    });
+}
 
 // GET
 

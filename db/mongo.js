@@ -1,7 +1,71 @@
 var db = null;
 
 exports.init = function(mongoosePointer){
+<<<<<<< HEAD
 	db = require('./models/models.js').do(mongoosePointer);
+=======
+	mongoose = mongoosePointer;
+	var userSchema = mongoose.Schema({
+		mail: String
+	});
+	User = mongoose.model('User',userSchema);
+
+	var foeSchema = mongoose.Schema({
+		name: String,
+		baseHp: Number,
+		remainingHp: Number,
+		speed: Number,
+		def: Number,
+		armor: Number,
+		xp: Number,
+		attrs: {
+			Commun: Number,
+			Const:Number,
+			Cunning: -Number,
+			Dext: Number,
+			Magic: Number,
+			Percep: Number,
+			Strenght: Number,
+			Willpow: Number
+		},
+		attacks: [mongoose.Schema.Types.Mixed],
+		notes: String,
+		alive: Boolean
+	});
+	Foe = mongoose.model('Foe',foeSchema);
+
+	var storyPointSchema = mongoose.Schema({
+			data:
+				{
+					story: String,
+					xp: Number,
+					loot: [String]
+				},
+			info:
+				{
+					userId: String,
+					storytype: String,
+					after: Number,
+					until: Number
+				},
+			combat:
+				{
+					foes: [foeSchema]
+				}
+		});
+	StoryPoint = mongoose.model('StoryPoint',storyPointSchema);
+	return this;
+}
+
+exports.initGame = function(usermail){
+	return new Game(usermail);
+}
+
+var Game = function(usermail){
+	var user = getUser(usermail);
+	//var storyline = getStoryline(user.id);
+	//return {user: user, storyline: storyline};
+>>>>>>> f123333f771d4a9808f791252d31029bef5c19bc
 }
 
 var getUser = function(mail){
@@ -22,12 +86,12 @@ var checkIfMailExists = function(mail){
 	return typeof(mail) !== "undefined" ? true : false;
 }
 
-var getStoryline = function(userid){
+exports.getStoryline = function(userid,callback){
 	var storypoints = [];
-	StoryPoint.find({'info.userId': userid},function collectStoryPoints(err, storyPoint){
-		storypoints.push(storyPoint);
+	console.log("userid:"+userid);
+	StoryPoint.find({'info.userId': ''+userid},function collectStoryPoints(err, storyPoints){
+		callback(storyPoints);
 	});
-	return storypoints;
 }
 
 exports.addStoryPoint = function(storyData,callback){

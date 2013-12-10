@@ -110,10 +110,10 @@ var calcApp = angular.module('calcApp', [])
 					foes: {
 							"0": {
 								name: "gigantischer org",
-								hp: 90,
-								currentHp: 90,
-								def: 10,
-								armor: 5,
+								hp: 100,
+								currentHp: 100,
+								def: 15,
+								armor: 10,
 								attacks: [
 									{name:"Keule", value:"2d6"},
 									{name:"Schrei", value: "stunn all if !TN13-Willpower"}
@@ -133,7 +133,7 @@ var calcApp = angular.module('calcApp', [])
 						},
 					xp: 50,
 					loot: ["5g","Ring der Genauhigkeit (attrroll +3)","orghaut (grob)","storyxp 50"],
-					story: "Der gigantische Org sitzt in der Ecke und bemerkt die Reisenede wärend er sich eine Rattensuppe kocht"
+					story: "Der gigantische Org sitzt in der Ecke und bemerkt die Reisenede wärend er sich eine Rattensuppe kocht. Danach Hinweis"
 				},
 			"2": {
 					name: "Verschwindenden Tiere (Nacht)",
@@ -220,7 +220,7 @@ var calcApp = angular.module('calcApp', [])
 								alive: true
 							},
 							"2": {
-								name: "Helfer 1",
+								name: "Käufer 1",
 								hp: 20,
 								currentHp: 20,
 								def: 13,
@@ -243,7 +243,7 @@ var calcApp = angular.module('calcApp', [])
 						},
 					xp: 50,
 					loot: ["1 gold","storyxp 50"],
-					story: ""
+					story: "Nach brunnen hinweis auf ein treffen. nächsten morgen mit käufer unter der eiche hinter dem gasthaus."
 			}
 		};
 

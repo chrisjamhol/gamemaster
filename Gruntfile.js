@@ -18,7 +18,7 @@ module.exports = function(grunt){
 				tasks: ['jshint'],
 			},
 			express: {
-				files: ['app.js','routes/*.js','db/*.js'],
+				files: ['app.js','routes/*.js','db/*.js','db/models/*.js'],
 				tasks: ['jshint','express:dev'],
 				options: {
 					spawn: false
