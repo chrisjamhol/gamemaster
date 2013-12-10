@@ -6,37 +6,9 @@
 var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/gamemaster');
 var db = require('./db/mongo.js').init(mongoose);
-db.initGame('chrisjamhol@gmail.com');
 //db.addUser('chrisjamhol@gmail.com',function(user){console.log(user);});
 
-
-
 /*
-db.addStoryPoint({
-    data: {
-        story: "tblakjlsdk olidkfj sdf",
-        xp: 100,
-        loot: ["item1dsfsdfsdf","itemdsfsd2"],
-        info: {
-        //storypointId: "52a1d0c478ddb1f41a000548",
-        //userId: 1,
-        test: "hi"
-        //after: 0,
-        //until: 1
-    }
-    },
-    info: {
-        //storypointId: "52a1d0c478ddb1f41a000548",
-        //userId: 1,
-        test: "hi",
-        //after: 0,
-        //until: 1
-    },
-    combat: {
-        foes: []
-    }
-},function(storypoint){console.log(storypoint);});
-*/
 db.addStoryPoint(
     {
         data: {
@@ -54,7 +26,7 @@ db.addStoryPoint(
             foes: []
         }
     },function(storypoint){console.log(storypoint);});
-
+*/
 
 var express = require('express'),
   routes = require('./routes'),
