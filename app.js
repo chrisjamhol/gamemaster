@@ -6,37 +6,11 @@
 var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/gamemaster');
 var db = require('./db/mongo.js').init(mongoose);
-db.initGame('chrisjamhol@gmail.com');
+//db.initGame('chrisjamhol@gmail.com');
 //db.addUser('chrisjamhol@gmail.com',function(user){console.log(user);});
 
 
-
 /*
-db.addStoryPoint({
-    data: {
-        story: "tblakjlsdk olidkfj sdf",
-        xp: 100,
-        loot: ["item1dsfsdfsdf","itemdsfsd2"],
-        info: {
-        //storypointId: "52a1d0c478ddb1f41a000548",
-        //userId: 1,
-        test: "hi"
-        //after: 0,
-        //until: 1
-    }
-    },
-    info: {
-        //storypointId: "52a1d0c478ddb1f41a000548",
-        //userId: 1,
-        test: "hi",
-        //after: 0,
-        //until: 1
-    },
-    combat: {
-        foes: []
-    }
-},function(storypoint){console.log(storypoint);});
-*/
 db.addStoryPoint(
     {
         data: {
@@ -54,11 +28,13 @@ db.addStoryPoint(
             foes: []
         }
     },function(storypoint){console.log(storypoint);});
-
+*/
 
 var express = require('express'),
   routes = require('./routes'),
   api = require('./routes/api');
+
+api.setDb(db);
 
 var app = module.exports = express.createServer();
 
@@ -91,7 +67,7 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
-
+app.get('/api/getstoryline/:userid',api.getStoryline);
 app.get('/api/posts', api.posts);
 
 app.get('/api/post/:id', api.post);

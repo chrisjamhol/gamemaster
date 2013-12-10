@@ -52,7 +52,6 @@ exports.init = function(mongoosePointer){
 				}
 		});
 	StoryPoint = mongoose.model('StoryPoint',storyPointSchema);
-	//console.log(StoryPoint);
 	return this;
 }
 
@@ -62,9 +61,8 @@ exports.initGame = function(usermail){
 
 var Game = function(usermail){
 	var user = getUser(usermail);
-	var storyline = getStoryline(user.id);
-	//console.log(storyline);
-	return {user: user, storyline: storyline};
+	//var storyline = getStoryline(user.id);
+	//return {user: user, storyline: storyline};
 }
 
 var getUser = function(mail){
@@ -85,12 +83,12 @@ var checkIfMailExists = function(mail){
 	return typeof(mail) !== "undefined" ? true : false;
 }
 
-var getStoryline = function(userid){
+exports.getStoryline = function(userid,callback){
 	var storypoints = [];
-	StoryPoint.find({'info.userId': userid},function collectStoryPoints(err, storyPoint){
-		storypoints.push(storyPoint);
+	console.log("userid:"+userid);
+	StoryPoint.find({'info.userId': ''+userid},function collectStoryPoints(err, storyPoints){
+		callback(storyPoints);
 	});
-	return storypoints;
 }
 
 exports.addStoryPoint = function(storyData,callback){

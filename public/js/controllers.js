@@ -10,16 +10,35 @@ gamemasterApp.controller('IndexController',
     ]
 );
 
+gamemasterApp.controller('loginController',
+    ['$scope','$state',
+        function loginController($scope,$state){
+            $scope.test = "hi";
+        }
+    ]);
+
 
 gamemasterApp.controller('storylineController',
-    ['$scope','$state',
-        function storylineController($scope,$state){
+    ['$scope','$state','$http',
+        function storylineController($scope,$state,$http){
             var storylineObj = {
                 "0": {title:"first Encount", text: "the first encounter", link: "storyline.encounter?0"},
                 "1": {title:"secon Encount", text: "the second encounter", link: "storyline.encounter?1"},
                 "2": {title:"third Encount", text: "the third encounter", link: "storyline.encounter?2"}
             };
             $scope.getStoryline = function getStoryline(){
+                var userIdTmp = '52a473a7f54eeca012000002';
+                var userId = userIdTmp;
+                $http.get('/api/getStoryline/'+userId)
+                    .success(function(data, status, headers, config){
+                        console.log(status);
+                        console.log(data);
+                    })
+                    .error(function(data, status, headers, config){
+                        console.log("error");
+                        console.log("status: "+status);
+                        console.log("data:"+data);
+                     });
                 return storylineObj;
             }
         }
