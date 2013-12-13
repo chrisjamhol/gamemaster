@@ -1,10 +1,10 @@
 section.pure-u-1-2
-	h2 Storyline
+	h2.storylineHeading Storyline
 	section.storylinewrapper
-		ul
-			li(data-ng-repeat="story in storylines")
-				div
-					h3 {{story.data.name}}
-					p {{story.data.story}}:
-					a(ui-sref='.encounter') {{story.link}}
+		ul.storyLine
+			li(data-ng-repeat="story in storyline")
+				p {{story.name}}
+				ul.storyPoint
+					li(data-ng-repeat="storypoint in story.storyPoints")
+						p storypoint.name
 section.pure-u-1-2(data-ui-view="")

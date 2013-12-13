@@ -23,12 +23,10 @@ gamemasterApp.controller('storylineController',
                 "1": {title:"secon Encount", text: "the second encounter", link: "storyline.encounter?1"},
                 "2": {title:"third Encount", text: "the third encounter", link: "storyline.encounter?2"}
             };
-
-            $http.get('/api/getStoryline/52a1bc7b8177ae7018000001')
+            var userId = '52a1bc7b8177ae7018000001'
+            $http.get('/api/getStoryline/'+userId)
                 .success(function(data, status, headers, config){
-                    console.log(status);
-                    console.log(data);
-                    $scope.storylines = data;
+                    $scope.storyline = data;
                 })
                 .error(function(data, status, headers, config){
                     console.log("error");

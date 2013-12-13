@@ -1,3 +1,14 @@
+@font-face{
+    font-family: 'Open Sans';
+    src: url('/fonts/OpenSans.ttf'); /* IE9 */
+}
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"]{
+    font-family: 'Open Sans', sans-serif;
+}
+
 .sidebar{
     margin-left: -150px;
     width: 150px;
@@ -12,6 +23,43 @@
     text-align: center;
 }
 
+.navItems{
+    list-style: none;
+    padding-left: 0px;
+}
+    .navItems a{
+        text-decoration: none;
+        color: white;
+    }
+
 .main{
     margin-left: 150px;
 }
+
+.storylineHeading{margin-left: 40px;}
+
+.storyLine{
+    list-style: none;
+}
+
+    .storyLine{
+        list-style: none;
+        min-width: 50px;
+        max-width: 400px;
+    }
+        .storyLine p{
+            background-color: #2980b9;
+            padding: 10px;
+            margin: 0px;
+        }
+
+    .storyPoint{
+        list-style: none;
+        margin: 0px;
+        margin-bottom: 15px;
+    }
+
+        .storyPoint p{
+            background-color: #16a085;
+            margin: 2px;
+        }

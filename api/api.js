@@ -1,14 +1,16 @@
+var Q = require('q');
 var db = null;
 
-exports.setDb = function(dbP){db = dbP;console.log(db);}
+exports.setDb = function(dbP){db = dbP;}
 
 exports.getStoryline = function(req,res){
-    console.log(req.params.userid);
-    db.getStoryline(req.params.userid,function(storyline){
-        console.log(storyline); 
-        //res.json({text: "hi"});
-        res.json(storyline); 
-    });
+    db.getStoryline('52a1bc7b8177ae7018000001')
+    .then(function(storyline){
+        res.json(storyline);
+    },function(reject){
+        console.log(reject);
+    })
+    .done();
 }
 
 // GET

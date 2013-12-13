@@ -1,27 +1,22 @@
+var Q = require('q');
 var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/gamemaster');
 var db = require('./db/mongo.js').init(mongoose);
 //db.addUser('chrisjamhol@gmail.com',function(user){console.log(user);});
-/*
-db.addStoryPoint(
-    {
-        data: {
-            name: "storypoitn name",
-            story: "tblakjlsdk olidkfj sdf",
-            xp: 100,
-            loot: ["item1dsfsdfsdf","itemdsfsd2"]
-        },
-        info: {
-            userId: "52a1bc7b8177ae7018000001",
-            storytype: "main",
-            after: 0,
-            until: 1
-        },
-        combat: {
-            foes: []
-        }
-    },function(storypoint){console.log(storypoint);});
-*/
+// db.addChapter({
+//     userId: "52a1bc7b8177ae7018000001",
+//     name: "second chapter",
+//     after: "52a83a3f3980b1281a000003",
+//     storyPoints: [{
+//         after: "isFirst",
+//         name: "first StoryPoint second Chapter",
+//         story: "story for the first StoryPoint from second Chapter",
+//         xp: 500,
+//         loot: ["lootitem1","lootitem2"],
+//         foes: []
+//     }]
+// },function(chapter){console.log(chapter);});
+//db.addStoryPoint('')
 
 var express = require('express'),
   routes = require('./routes/routes.js'),
@@ -74,5 +69,8 @@ app.get('*', routes.index);
 // Start server
 
 app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+    console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+    console.log();
 });
+
+
