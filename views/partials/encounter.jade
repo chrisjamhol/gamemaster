@@ -1,0 +1,13 @@
+h2 Encounterdata
+h4 {{encounter.name}}
+div.storytext
+	p {{encounter.story}}
+h4 Foes:
+div.foe(data-ng-repeat="foe in encounter.foes")
+	p {{foe.name}}
+h4 Rewards:
+div.rewards	
+	p xp: {{encounter.xp}}
+	p Loot:
+	ul(data-ng-repeat="lootitem in encounter.loot")
+		li {{lootitem}}

@@ -2,7 +2,14 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
-			all: ['*.js']//,'public/js/*.js']
+			all: [
+				'*.js',
+				'api/*.js',
+				'db/models/*.js',
+				'db/*.js',
+				'routes/*.js'
+				//,'public/js/*.js'
+				]
 		},
 		express: {
 			dev: {

@@ -8,23 +8,27 @@ var Models = function(mongoose){
 	var foeSchema = mongoose.Schema({
 			name: String,
 			baseHp: Number,
-			remainingHp: Number,
-			speed: Number,
-			def: Number,
-			armor: Number,
-			xp: Number,
-			attrs: {
-				Commun: Number,
-				Const:Number,
-				Cunning: -Number,
-				Dext: Number,
-				Magic: Number,
-				Percep: Number,
-				Strenght: Number,
-				Willpow: Number
-			},
-			attacks: [mongoose.Schema.Types.Mixed],
-			notes: String,
+			//remainingHp: Number,
+			//speed: Number,
+			//def: Number,
+			//armor: Number,
+			//xp: Number,
+			//attrs: {
+			//	Commun: Number,
+			//	Const: Number,
+			//	Cunning: Number,
+			//	Dext: Number,
+			//	Magic: Number,
+			//	Percep: Number,
+			//	Strenght: Number,
+			//	Willpow: Number
+			//},
+			//attacks: [{
+			//	name: String,
+			//	value: String,
+			//	description: String
+			//}],
+			//notes: String,
 			alive: Boolean
 		});
 
@@ -41,7 +45,7 @@ var Models = function(mongoose){
 		story: String,
 		xp: Number,
 		loot: [String],
-		foes: [String]
+		foes: [mongoose.Schema.ObjectId]
 	});
 
 /** Schema Functions **/
@@ -70,5 +74,5 @@ var Models = function(mongoose){
 	this.Foe = mongoose.model('Foe',foeSchema);
 	this.Chapter = mongoose.model('Chapter',chapterSchema);
 	this.StoryPoint = mongoose.model('StoryPoint',storypointSchema);
-}
-exports.do = function(mongoose){return new Models(mongoose);}
+};
+exports.do = function(mongoose){return new Models(mongoose);};

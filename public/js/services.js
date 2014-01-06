@@ -2,8 +2,8 @@
 
 /* Services */
 
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+gamemasterApp.service('EncounterData',function(){
+	var data = null;
+	this.set = function(newData){data = newData;};
+	this.get = function(){return data;};
+});
