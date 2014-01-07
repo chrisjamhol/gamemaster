@@ -5,8 +5,30 @@ div.storytext
 h4 Foes:
 div.foe(data-ng-repeat="foe in encounter.foes")
 	p {{foe.name}}
+	p Hp: {{foe.remainingHp}} / {{foe.baseHp}} -> {{foe.alive}}
+	p Speed: {{foe.speed}}
+	p Armor: {{foe.armor}}
+	p Def: {{foe.def}}
+	p xp: {{foe.xp}}
+	p Attacks:
+	ul.attacks(data-ng-repeat="attack in foe.attacks")
+		li {{attack.name}}
+			ul.attacksDetails
+				li {{attack.value}}
+				li {{attack.description}}
+	p Attrs:
+	ul.attrs
+		li Commun: {{foe.attrs.Commun}}
+		li Const: {{foe.attrs.Const}}
+		li Cunning: {{foe.attrs.Cunning}}
+		li Dext: {{foe.attrs.Dext}}
+		li Magic: {{foe.attrs.Magic}}
+		li Percep: {{foe.attrs.Percep}}
+		li Strength: {{foe.attrs.Strenght}}
+		li Willpow: {{foe.attrs.Willpow}}
+	p {{foe.notes}}
 h4 Rewards:
-div.rewards	
+div.rewards
 	p xp: {{encounter.xp}}
 	p Loot:
 	ul(data-ng-repeat="lootitem in encounter.loot")

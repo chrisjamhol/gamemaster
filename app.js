@@ -22,9 +22,9 @@ var db = require('./db/mongo.js').init(mongoose);
 //		foes: []
 // },function(storypoint){console.log(storypoint);});
 
-db.addFoe({
-	"name": "Spider",
-	"baseHp": 150,
+//db.addFoe({
+//	"name": "Spider",
+//	"baseHp": 150,
 //	"remainingHp": 150,
 //	"speed": 20,
 //	"def": 10,
@@ -44,11 +44,11 @@ db.addFoe({
 //		{"name":"Bite", "value":"1d6+2", "description": ""},
 //		{"name":"Netz", "value":"1d6", "description":"stunn if tn 12 for max 3 Rounds !if Strenght(Might) > 10"}
 //	],
-//	"notes": "creepy",
-	"alive": true
-},function(foe){
-	console.log(foe.name);
-});
+//"notes": "creepy",
+//	"alive": true
+//},function(foe){
+//	console.log(foe.name);
+//});
 
 var express = require('express'),
   routes = require('./routes/routes.js'),
@@ -89,6 +89,7 @@ app.get('/partials/:name', routes.partials);
 // JSON API
 app.get('/api/getchapters/:userid',api.getChapters);
 app.get('/api/getstorypoints/:chapterid',api.getStoryPoints);
+app.get('/api/getstoryline/:userid',api.getStoryline);
 
 app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);

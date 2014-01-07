@@ -3,32 +3,33 @@ var Models = function(mongoose){
 	var userSchema = mongoose.Schema({
 			mail: String,
 			name: String
+			//,chapters: [{type: mongoose.Schema.Types.ObjectId, ref: 'Chapter'}]
 		});
 
 	var foeSchema = mongoose.Schema({
 			name: String,
 			baseHp: Number,
-			//remainingHp: Number,
-			//speed: Number,
-			//def: Number,
-			//armor: Number,
-			//xp: Number,
-			//attrs: {
-			//	Commun: Number,
-			//	Const: Number,
-			//	Cunning: Number,
-			//	Dext: Number,
-			//	Magic: Number,
-			//	Percep: Number,
-			//	Strenght: Number,
-			//	Willpow: Number
-			//},
-			//attacks: [{
-			//	name: String,
-			//	value: String,
-			//	description: String
-			//}],
-			//notes: String,
+			remainingHp: Number,
+			speed: Number,
+			def: Number,
+			armor: Number,
+			xp: Number,
+			attrs: {
+				Commun: Number,
+				Const: Number,
+				Cunning: Number,
+				Dext: Number,
+				Magic: Number,
+				Percep: Number,
+				Strenght: Number,
+				Willpow: Number
+			},
+			attacks: [{
+				name: String,
+				value: String,
+				description: String
+			}],
+			notes: String,
 			alive: Boolean
 		});
 
@@ -36,7 +37,7 @@ var Models = function(mongoose){
 		userId: String,
 		name: String,
 		after: String,
-		storyPoints: [String]
+		storyPoints: [{type: mongoose.Schema.Types.ObjectId, ref: 'StoryPoint'}]
 	});
 
 	var storypointSchema = mongoose.Schema({
@@ -45,7 +46,7 @@ var Models = function(mongoose){
 		story: String,
 		xp: Number,
 		loot: [String],
-		foes: [mongoose.Schema.ObjectId]
+		foes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Foe'}]
 	});
 
 /** Schema Functions **/

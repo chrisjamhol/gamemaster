@@ -3,25 +3,14 @@ var db = null;
 
 exports.setDb = function(dbP){db = dbP;};
 
-exports.getChapters = function(req,res){
-	db.getChapters(req.params.userid)
-		.then(function(chapters){
-			res.json(chapters);
-		},function(reject){
-			console.log(reject);
-		})
-		.done();
-};
-
-exports.getStoryPoints = function(req,res){
-	db.getStoryPoints(req.params.chapterid)
-		.then(function(storypoints){
-			//console.log(storypoints);
-			res.json(storypoints);
-		},function(reject){
-			console.log(reject);
-		})
-		.done();
+exports.getStoryline = function(req,res){
+    db.getStoryline(req.params.userid)
+        .then(function(storyline){
+            res.json(storyline);
+        },function(reject){
+            console.log(reject);
+        })
+        .done();
 };
 
 // GET
