@@ -1,0 +1,58 @@
+div.foeNameEditWrapper
+	input(type="text", size="35", value="{{foe.name}}").foeNameEdit
+div.foeData.foeDataEdit.pure-g
+	div.pure-u-1-2
+		table.pure-table
+			thead
+				th Attr
+				th Value
+			tbody
+				tr
+					td BaseHp
+					td
+						input(type="text", size="8", value="{{foe.baseHp}}", data-ng-model="foe.baseHp")
+				tr
+					td RemainingHp
+					td
+						input(type="text", size="8", value="{{foe.remainingHp}}", data-ng-model="foe.remainingHp")
+				tr
+					td Alive
+					td
+						input(type="text", size="5", value="{{foe.alive}}", data-ng-model="foe.alive")
+				tr
+					td Speed
+					td
+						input(type="number", size="5", value="{{foe.speed}}", data-ng-model="foe.speed")
+				tr
+					td Armor
+					td
+						input(type="number", size="5", value="{{foe.armor}}", data-ng-model="foe.armor")
+				tr
+					td Defense
+					td
+						input(type="number", size="5", value="{{foe.def}}", data-ng-model="foe.def")
+				tr
+					td Xp
+					td
+						input(type="number", size="15", value="{{foe.xp}}", data-ng-model="foe.xp")
+	div.pure-u-1-2
+		table.pure-table
+			thead
+				th Attr
+				th Value
+			tbody
+				tr(data-ng-repeat="(key,val) in foe.attrs")
+					td {{key}}
+					td
+						input(type="number", size="5", value="{{val}}", data-ng-model="foe.attrs[val]")
+div.foeAttackEdit(data-ng-repeat="attack in foe.attacks" data-foeattack)
+button.addAttack.addButton.pure-button(data-ng-click="addAttack") Add Attack
+div.foeNotes
+	p Notes
+	input(type="text",value="{{foe.notes}}", data-ng-model="foe.notes")
+div.foeActionButtons
+	button.saveFoe.pure-button.saveButton(data-ng-click="saveEncounterChange('foe',encounter)") Save Foe
+	button.deleteFoe.pure-button.deleteButton(data-ng-click="deleteFromEncounter('foe',encounter)") Delete Foe
+
+
+

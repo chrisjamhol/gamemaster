@@ -14,28 +14,40 @@ var gamemasterApp = angular.module('gamemasterApp', ['ui.router'])
 				.state('login',{
 					url: "/login",
 					templateUrl: "index",
-					controller: 'LoginController',
-					onEnter: function(){console.log("entering login");}
+					controller: 'LoginController'
 				})
 				.state('home',{
 					url: "/home",
 					templateUrl: "index",
-					controller: 'IndexController',
-					onEnter: function(){console.log("entered index controller scope");}
+					controller: 'IndexController'
 				})
 				.state('storyline',{
 					url: "/storyline",
 					views: {
-						'storylineView': {
-							templateUrl: "partials/storyline",						
+						'mainLeftView': {
+							templateUrl: "partials/storyline",
 							controller: 'chapterController'
 						},
-						'encounterView': {
+						'mainRightView': {
 							templateUrl: "partials/encounter",
 							controller: 'encounterController'
 						}
 					}
-					
-				});
+
+				})
+                .state('edit',{
+                    url: "/edit",
+                    views: {
+                        'mainLeftView': {
+                           templateUrl: "partials/edit_storyline",
+                            controller: "editStorylineController"
+                        },
+                        'mainRightView': {
+                            templateUrl: "partials/edit_encounter",
+                            controller: 'editEncounterController'
+                        }
+                    }
+
+                });
 		}
 	]);

@@ -1,0 +1,23 @@
+section.encounterData(data-ng-show="encounter.name")
+	h2 Encounterdata
+	h3 {{encounter.name}}
+	h4 Story
+	div.storytext
+		textarea.encounterStoryEdit(data-ng-model="encounter.story")
+			{{encounter.story}}
+		button.saveEncounterStory.pure-button.saveButton(data-ng-click="saveEncounterChange('story',encounter)") save Story
+	h4 Foes
+	div.foe(data-ng-repeat="foe in encounter.foes" data-foedata)
+	button.addFoe.pure-button.addButton(data-ng-click="newFoe") New Foe
+	h4 Rewards
+	div.rewards
+		p= 'xp: '
+			input(type="text", size="4", value="{{encounter.xp}}", data-ng-model="encounter.xp")
+		button.pure-button.saveChangedXpButton.saveButton(data-ng-click="saveEncounterChange('xp',encounter)") save Xp
+		p Loot:
+		ul(data-ng-repeat="lootitem in encounter.loot")
+			li
+				input(type="text", size="40", value="{{lootitem}}", data-ng-model="lootitem")
+				button.deleteLoot.deleteButton.pure-button(data-ng-click="deleteLootItem(lootitem)") Delete
+		button.addLootItem.pure-button.addButton(data-ng-click="addLootItem()") Add Item
+		button.saveChangedLootButton.pure-button.saveButton(data-ng-click="saveEncounterChange('loot',encounter)") save Loot

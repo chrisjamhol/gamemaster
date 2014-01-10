@@ -10,6 +10,14 @@ var init = function(mongoosePointer){
 	Chapter = Models.Chapter;
 	StoryPoint = Models.StoryPoint;
 	Foe = Models.Foe;
+
+	Chapter.findQ = Q.nfbind(Chapter.find.bind(Chapter));
+    Chapter.findOneQ = Q.nfbind(Chapter.findOne.bind(Chapter));
+    StoryPoint.findQ = Q.nfbind(StoryPoint.find.bind(StoryPoint));
+    StoryPoint.findOneQ = Q.nfbind(StoryPoint.findOne.bind(StoryPoint));
+    Foe.findQ = Q.nfbind(Foe.find.bind(Foe));
+    Foe.findOneQ = Q.nfbind(Foe.findOne.bind(Foe));
+
 	return this;
 };
 
@@ -35,16 +43,44 @@ var checkIfMailExists = function(mail){
 
 /* Chapter */
 
-var addChapter = function(chapterData,callback){
+var newChapter = function(chapterData,callback){
 	var newChapter = new Chapter(chapterData).save(function afterChapterAdd(err,chapter){
 		if(err){console.log(err);}
 		else{callback(chapter);}
 	});
 };
 
-var getChapters = function(userId){
+var saveChapterNames = function (changes){
 	var deferred = Q.defer();
-
+	Chapter
+		.findOneQ({_id: changes.chapter.id})
+		.then(
+			function(chapter){
+				var deferred = Q.defer();
+				var storypointPromise = [];
+				chapter.name = changes.chapter.name;
+				chapter.save();
+				changes.storyPoints.forEach(function(storypoint,key){
+					var deferred = Q.defer();
+					StoryPoint
+						.findOneQ({_id: storypoint.id})
+						.then(function(storypointDb){
+								storypointDb.name = storypoint.name;
+								storypointDb.save();
+								deferred.resolve(storypointDb);
+							})
+						.done();
+					storypointPromise.push(deferred.promise);
+				});
+				return Q.all(storypointPromise);
+			},
+			function(err){deferred.reject(err);}
+		)
+		.then(
+			function(storypoints){deferred.resolve({"status": "ok"});},
+			function(err){deferred.reject(err);}
+		)
+		.done();
 	return deferred.promise;
 };
 
@@ -67,6 +103,22 @@ var addStoryPoint = function(chapterId,storyData,callback){
 var getStoryPoints = function(chapterId){
 	var deferred = Q.defer();
 
+	return deferred.promise;
+};
+
+var putStoryPointData = function(changes){
+	var deferred = Q.defer();
+	StoryPoint
+		.findOneQ({_id: changes.storypoint.id})
+		.then(
+			function(storypoint){
+				storypoint[changes.change.key] = storypoint[changes.change.val];
+				storypoint.save();
+				deferred.resolve(storypoint);
+			},function(err){
+				deferred.reject(err);
+			})
+		.done();
 	return deferred.promise;
 };
 
@@ -110,8 +162,8 @@ module.exports = {
 
 	getStoryline: getStoryline,
 
-	addChapter: addChapter,
-	getChapters: getChapters,
+	newChapter: newChapter,
+	saveChapterNames: saveChapterNames,
 
 	addStoryPoint: addStoryPoint,
 	getStoryPoints: getStoryPoints,

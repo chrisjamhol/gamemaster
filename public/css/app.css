@@ -12,7 +12,7 @@ body,
 html,body{
     height: 100%;
     margin:0;
-    padding:0;    
+    padding:0;
 }
 
 .wrapper{height: 100%;}
@@ -24,8 +24,10 @@ html,body{
 }
 
 .main{
-    
+
 }
+
+/* nav */
 
 .navItems{
     list-style: none;
@@ -36,11 +38,13 @@ html,body{
         color: white;
     }
 
+/* stoyline */
+
 .storylineHeading{margin-left: 40px;}
 
 .storyline{
     min-width: 50px;
-    max-width: 500px;    
+    max-width: 500px;
 }
 
 .chapter p{
@@ -56,7 +60,7 @@ html,body{
     padding: 10px;
     margin: 2px;
     margin-left: 45px;
-    margin-right: 10px; 
+    margin-right: 10px;
     font-weight: normal;
     color: black;
 }
@@ -65,6 +69,21 @@ html,body{
     margin: 15px;
 }
 
+/* encounter */
 
+.foe{
+    font-size: 0.9em;
+}
+
+.foeName{
+    background-color: #e0e0e0;
+    padding: 5px;
+}
+
+.foeData{
+    margin-left: 30px;
+    display: none;
+}
 
 .hidden{display: none;}
+

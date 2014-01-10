@@ -1,35 +1,61 @@
-h2 Encounterdata
-h4 {{encounter.name}}
-div.storytext
-	p {{encounter.story}}
-h4 Foes:
-div.foe(data-ng-repeat="foe in encounter.foes")
-	p {{foe.name}}
-	p Hp: {{foe.remainingHp}} / {{foe.baseHp}} -> {{foe.alive}}
-	p Speed: {{foe.speed}}
-	p Armor: {{foe.armor}}
-	p Def: {{foe.def}}
-	p xp: {{foe.xp}}
-	p Attacks:
-	ul.attacks(data-ng-repeat="attack in foe.attacks")
-		li {{attack.name}}
-			ul.attacksDetails
-				li {{attack.value}}
-				li {{attack.description}}
-	p Attrs:
-	ul.attrs
-		li Commun: {{foe.attrs.Commun}}
-		li Const: {{foe.attrs.Const}}
-		li Cunning: {{foe.attrs.Cunning}}
-		li Dext: {{foe.attrs.Dext}}
-		li Magic: {{foe.attrs.Magic}}
-		li Percep: {{foe.attrs.Percep}}
-		li Strength: {{foe.attrs.Strenght}}
-		li Willpow: {{foe.attrs.Willpow}}
-	p {{foe.notes}}
-h4 Rewards:
-div.rewards
-	p xp: {{encounter.xp}}
-	p Loot:
-	ul(data-ng-repeat="lootitem in encounter.loot")
-		li {{lootitem}}
+section.encounterData(data-ng-show="encounter.name")
+	h2 Encounterdata
+	h3 {{encounter.name}}
+	h4 Story
+	div.storytext
+		p {{encounter.story}}
+	h4 Foes
+	div.foe(data-ng-repeat="foe in encounter.foes")
+		h4.foeName(data-foldfoe) {{foe.name}}
+		div.foeData
+			table.pure-table
+				tr
+					td <strong>Hp:</strong>
+					td {{foe.remainingHp}} / {{foe.baseHp}}
+					td <strong>alive:</strong>
+					td {{foe.alive}}
+					td
+						input(type="text",size="5")
+					td
+						button.pure-button(data-ng-click="attack(foe)") attack
+				tr
+					td <strong>Speed:</strong>
+					td {{foe.speed}}
+					td <strong>Armor:</strong>
+					td {{foe.armor}}
+					td <strong>Def:</strong>
+					td {{foe.def}}
+			br
+			div.pure-g
+				div.pure-u-1-3
+					span(data-foldfoeattrs) <strong>Attributes:</strong>
+						table.pure-table.attrTable
+							thead
+								tr
+									th Attr
+									th
+							tbody(data-ng-repeat="(key,val) in foe.attrs")
+								tr
+									td {{key}}
+									td {{val}}
+				div.pure-u-2-3
+					span(data-foldfoeattrs) <strong>Attacks:</strong>
+						table.pure-table.attackTable
+							thead
+								tr
+									th Attack
+									th Value
+									th Descrition
+							tbody(data-ng-repeat="attack in foe.attacks")
+								tr
+									td <strong>{{attack.name}}</strong
+									td {{attack.value}}
+									td {{attack.description}}
+					p xp: {{foe.xp}}
+					p {{foe.notes}}
+	h4 Rewards
+	div.rewards
+		p xp: {{encounter.xp}}
+		p Loot:
+		ul(data-ng-repeat="lootitem in encounter.loot")
+			li {{lootitem}}

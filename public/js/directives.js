@@ -26,3 +26,47 @@ gamemasterApp.directive('chapterfold', function ($document) {
 			});
 		};
 });
+
+gamemasterApp.directive('foldfoe', function ($document){
+	return function (scope, element, attrs){
+		element.css({cursor: 'pointer'});
+		element.bind('click',function(data){
+			var target = $(this).siblings();
+				target = target[0];
+			if($(target).is(':visible')){
+				$(target).hide();
+			}else{
+				$(target).show();
+			}
+		});
+	};
+});
+
+gamemasterApp.directive('foldfoeattrs', function ($document){
+	return function (scope, element, attrs){
+		element.css({cursor: 'pointer'});
+		element.bind('click',function(data){
+			var target = $(this).children();
+				target = target[1];
+			if($(target).is(':visible')){
+				$(target).hide();
+			}else{
+				$(target).show();
+			}
+		});
+	};
+});
+
+gamemasterApp.directive('foedata', function (){
+	return {
+		restrict: 'A',
+		templateUrl: 'partials/edit_encounter_foedata'
+	};
+});
+
+gamemasterApp.directive('foeattack',function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'partials/edit_encounter_foedata_attack'
+	};
+});

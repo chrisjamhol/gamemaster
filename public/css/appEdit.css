@@ -1,0 +1,106 @@
+/* chapterEdit */
+.chapterNameEdit,.addChapter{
+	background-color: #2980b9;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.chapterNameEdit{margin-left: 25px;}
+
+.chapter button,.addChapter{
+	font-size: 0.8em !important;
+}
+
+.chapterActions button, .storyPointActions button, .chapterNameEditSave{
+	margin-top: 5px;
+	margin-right: 10px;
+}
+
+/* storypointEdit */
+
+.storypointEdit,.addStoryPoint{
+	background-color: #16a085;
+	padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    color: white;
+    margin-left: 55px;
+}
+
+.addStoryPoint{
+	margin: 3px;
+	margin-left: 40%;
+}
+
+/* encounterEdit */
+
+.saveButton{background-color: #2ecc71;color: white;}
+.deleteButton{background-color: #c0392b;color: white;}
+.addButton{background-color: #e67e22;color:white;}
+
+.encounterStoryEdit{
+	width: 100%;
+}
+
+.saveEncounterStory,.saveFoeButton{
+	margin-top: 5px;
+}
+
+.deleteLoot{
+	font-size: 0.8em;
+	margin-left: 5px;
+}
+
+.addLootItem{
+	margin-right: 15px;
+}
+
+/* foe */
+
+.foe{
+	margin-top: 25px;
+}
+
+.foeNameEditWrapper{
+	margin: 5px;
+	background-color: #e0e0e0;
+	padding: 5px;
+}
+
+.foeDataEdit{
+	display: block;
+	margin-top: 15px;
+}
+
+.addFoe{
+	margin-top: 35px;
+	margin-left: 45px;
+}
+
+.deleteFoe{
+	margin-top: 25px;
+	margin-left: 15px;
+	color: white;
+}
+
+.addAttack{
+	margin-top: 15px;
+}
+
+.foeAttackEditTable{
+	width: 100%;
+	margin-top: 15px;
+}
+
+	.foeAttackEditTable input{
+		width: 100%;
+	}
+
+.foeNotes{
+	margin-top: 15px;
+}
+
+
+

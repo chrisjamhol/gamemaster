@@ -1,0 +1,15 @@
+table.pure-table.foeAttackEditTable
+		thead
+			th Attack
+			th Value/Descr
+		tbody
+			tr
+				td
+					input(type="text", value="{{attack.name}}", data-ng-model="attack.name")
+				td
+					input(type="text", value="{{attack.value}}", data-ng-model="attack.value")
+			tr
+				td
+					button.deleteAttack.deleteButton.pure-button(data-ng-click="deleteAttack(attack)") Delete Attack
+				td
+					input(type="text", value="{{attack.description}}", data-ng-model="attack.description")

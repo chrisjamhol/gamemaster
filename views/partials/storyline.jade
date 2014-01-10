@@ -1,3 +1,8 @@
 h2.storylineHeading Storyline
 section.storyline
-	section.chapterwrapper(data-ng-repeat="chapter in chapters" data-chapter).chapter
+	section.chapter(data-ng-repeat="chapter in chapters" data-chapter)
+		div(data-ng-init="chapterId = chapter._id")
+		div(data-ng-controller="storypointController")
+				p {{chapter.name}}
+				div.storypointwrapper(data-ng-repeat="storypoint in chapter.storyPoints").storypoint
+						p(data-ng-click="showEncounter(storypoint)") {{storypoint.name}}

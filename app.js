@@ -91,6 +91,11 @@ app.get('/api/getchapters/:userid',api.getChapters);
 app.get('/api/getstorypoints/:chapterid',api.getStoryPoints);
 app.get('/api/getstoryline/:userid',api.getStoryline);
 
+app.put('/api/putchapternames',api.saveChapterNames);
+app.put('/api/putstorypointsdata/',api.putStoryPointData);
+
+app.post('/api/newChapter',api.newChapter);
+
 app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);

@@ -4,13 +4,13 @@ var db = null;
 exports.setDb = function(dbP){db = dbP;};
 
 exports.getStoryline = function(req,res){
-    db.getStoryline(req.params.userid)
-        .then(function(storyline){
-            res.json(storyline);
-        },function(reject){
-            console.log(reject);
-        })
-        .done();
+	db.getStoryline(req.params.userid)
+		.then(function(storyline){
+			res.json(storyline);
+		},function(reject){
+			console.log(reject);
+		})
+		.done();
 };
 
 // GET
@@ -47,6 +47,12 @@ exports.addPost = function (req, res) {
 	res.json(req.body);
 };
 
+exports.newChapter = function(req, res){
+	db.newChapter(req.body,function(data){
+		console.log(data);
+	});
+};
+
 // PUT
 
 exports.editPost = function (req, res) {
@@ -58,6 +64,23 @@ exports.editPost = function (req, res) {
 	} else {
 		res.json(false);
 	}
+};
+
+exports.saveChapterNames = function(req, res){
+	db.saveChapterNames(req.body)
+		.then(function(data){
+			console.log(data);
+			res.json({"status": "ok"});
+		})
+		.done();
+};
+
+exports.putStoryPointData = function(req, res){
+	db.putStoryPointData(req.body)
+		.then(function(storypoint){
+			res.json(storypoint);
+		})
+		.done();
 };
 
 // DELETE

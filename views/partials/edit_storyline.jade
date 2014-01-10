@@ -1,0 +1,19 @@
+h2.storylineHeading Storyline
+section.storyline
+	section.chapterwrapper
+		button.addChapter.addButton.pure-button(data-ng-click="newChapter(0)") + Chapter
+		div.chapter(data-ng-repeat="chapter in chapters")
+			div.chapterNameEdit
+				input.chapterEditNameInput(type="text", size="35", value="{{chapter.name}}", data-ng-model="chapter.name")
+				div.chapterActions
+					button.removeChapter.deleteButton.pure-button(data-ng-click="removeChapter(chapter)") Delete Chapter
+					button.chapterNameEditSave.saveButton.pure-button(data-ng-click="saveChapterChange(chapter)") save
+			button.addStoryPoint.addButton.pure-button(data-ng-click="newStoryPoint(chapter,0)") + StoryPoint
+			div.storypointEditWrapper(data-ng-repeat="storypoint in chapter.storyPoints")
+				div.storypointEdit
+					input.storyPointEditInput(type="text", size="30", value="{{storypoint.name}}", data-ng-model="storypoint.name")
+					div.storyPointActions
+						button.removeStoryPoint.deleteButton.pure-button(data-ng-click="removeStoryPoint(chapter,storypoint)") Delete StoryPoint
+						button.encounterShowButton.pure-button(data-ng-click="showEncounter(storypoint)") show
+				button.addStoryPoint.addButton.pure-button(data-ng-click="newStoryPoint(chapter,($index+1))") + StoryPoint
+			button.addChapter.addButton.pure-button(data-ng-click="newChapter($index+1)") + Chapter
