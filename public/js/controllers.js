@@ -1,5 +1,6 @@
 'use strict';
-var userId = '52a1bc7b8177ae7018000001';
+//var userId = '52a1bc7b8177ae7018000001';	//work
+var userId = '52a473a7f54eeca012000002';	//home
 
 var httpErrorHandler = function(data, status, headers, config){
 		console.log("error");
@@ -51,26 +52,72 @@ gamemasterApp.controller('editStorylineController',
 			}
 
 			$scope.newChapter = function(index){
-				console.log(index);
 				var chapterName = prompt("Chapter Name:");
 				if(chapterName){
-					$http.post('/api/newChapter',chapterName)
-						.success(function(chapter){
+					var newChapterData = {
+						chapterName: chapterName,
+						userId: userId,
+						pos: index
+					};
 
+					$http.post('/api/newchapter',newChapterData)
+						.success(function(chapter){
+							$http.get('/api/getstoryline/'+userId)
+								.success(function(data, status, headers, config){
+									$scope.chapters = data;
+								})
+								.error(httpErrorHandler);
 						})
 						.error(httpErrorHandler);
 				}
 			}
 
+			$scope.removeChapter = function(chapter){
+				$http.delete('/api/deletechapter/'+userId+"/"+chapter._id)
+					.success(function(user){
+						$http.get('/api/getstoryline/'+userId)
+								.success(function(data, status, headers, config){
+									$scope.chapters = data;
+								})
+								.error(httpErrorHandler);							
+					})
+					.error(httpErrorHandler);
+			}
+
 			$scope.newStoryPoint = function(chapter,index){
-				console.log(chapter);
-				console.log(index);
+				var storyPointName = prompt("StoryPoint Name:");
+				if(storyPointName){
+					var newStoryPointData = {
+						name: storyPointName,
+						chapterId: chapter._id,
+						pos: index
+					};
+
+					$http.post('/api/newstorypoint',newStoryPointData)
+						.success(function(storypoint){
+							$http.get('/api/getstoryline/'+userId)
+								.success(function(data, status, headers, config){
+									$scope.chapters = data;
+								})
+								.error(httpErrorHandler);
+						})
+						.error(httpErrorHandler);
+				}
+			}
+
+			$scope.removeStoryPoint = function(chapter,storypoint){
+				$http.delete('/api/deletestorypoint/'+storypoint._id+"/"+chapter._id)
+					.success(function(chapter){
+						$http.get('/api/getstoryline/'+userId)
+								.success(function(data, status, headers, config){
+									$scope.chapters = data;
+								})
+								.error(httpErrorHandler);							
+					})
+					.error(httpErrorHandler);
 			}
 
 			$scope.saveChapterChange = function(chapter){
-				console.log($scope);
-				console.log($scope.chapters);
-				console.log(chapter.name);
 				var postdata = {
 					'chapter': {'name': chapter.name,
 								'id': chapter._id},
@@ -102,5 +149,25 @@ gamemasterApp.controller('editEncounterController',
 				$scope.encounter = encData;
 				console.log(encData);
 			});
+
+			$scope.saveEncounterChange = function(changed,encounter){
+				var changedData = {
+					change: {
+						key: changed,
+						val: encounter[changed]
+					},
+					storypoint: {
+						id: encounter._id
+					}
+				};
+
+				$http.put('/api/putstorypointdata/',changedData)
+					.success(function(data, status, headers, config){
+
+					})
+					.error(httpErrorHandler);
+			}
+
+			$scope.putStoryPointData
 		}
 	]);

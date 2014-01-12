@@ -2,8 +2,8 @@ var Models = function(mongoose){
 /** Schemas **/
 	var userSchema = mongoose.Schema({
 			mail: String,
-			name: String
-			//,chapters: [{type: mongoose.Schema.Types.ObjectId, ref: 'Chapter'}]
+			name: String,
+			chapters: [{type: mongoose.Schema.Types.ObjectId, ref: 'Chapter'}]
 		});
 
 	var foeSchema = mongoose.Schema({

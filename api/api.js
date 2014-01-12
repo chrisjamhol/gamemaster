@@ -42,15 +42,20 @@ exports.post = function (req, res) {
 
 // POST
 
-exports.addPost = function (req, res) {
-	data.posts.push(req.body);
-	res.json(req.body);
+exports.newChapter = function(req, res){
+	db.newChapter(req.body)
+		.then(function(chapters){
+			res.json(true);
+		})
+		.done();
 };
 
-exports.newChapter = function(req, res){
-	db.newChapter(req.body,function(data){
-		console.log(data);
-	});
+exports.newStoryPoint = function(req, res){
+	db.newStoryPoint(req.body)
+		.then(function(storypoint){
+			res.json(true);
+		})
+		.done();
 };
 
 // PUT
@@ -69,7 +74,6 @@ exports.editPost = function (req, res) {
 exports.saveChapterNames = function(req, res){
 	db.saveChapterNames(req.body)
 		.then(function(data){
-			console.log(data);
 			res.json({"status": "ok"});
 		})
 		.done();
@@ -84,6 +88,22 @@ exports.putStoryPointData = function(req, res){
 };
 
 // DELETE
+
+exports.deleteChapter = function(req, res){
+	db.deleteChapter(req.params)
+		.then(function(user){
+			res.json(true);
+		})
+		.done();
+};
+
+exports.deleteStoryPoint = function(req, res){
+	db.deleteStoryPoint(req.params)
+		.then(function(chapter){
+			res.json(true);
+		})
+		.done();
+};
 
 exports.deletePost = function (req, res) {
 	var id = req.params.id;

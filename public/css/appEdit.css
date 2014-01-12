@@ -13,6 +13,10 @@
 	font-size: 0.8em !important;
 }
 
+.chapterEditNameInput,.storyPointEditInput{
+	width: 100%;
+}
+
 .chapterActions button, .storyPointActions button, .chapterNameEditSave{
 	margin-top: 5px;
 	margin-right: 10px;

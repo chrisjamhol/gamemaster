@@ -92,9 +92,14 @@ app.get('/api/getstorypoints/:chapterid',api.getStoryPoints);
 app.get('/api/getstoryline/:userid',api.getStoryline);
 
 app.put('/api/putchapternames',api.saveChapterNames);
-app.put('/api/putstorypointsdata/',api.putStoryPointData);
+app.put('/api/putstorypointdata/',api.putStoryPointData);
+app.put('/api/saveencounterchange',api.saveEncounterChange);
 
-app.post('/api/newChapter',api.newChapter);
+app.post('/api/newchapter',api.newChapter);
+app.post('/api/newstorypoint',api.newStoryPoint);
+
+app.delete('/api/deletechapter/:userid/:chapterid',api.deleteChapter);
+app.delete('/api/deletestorypoint/:storypointid/:chapterid',api.deleteStoryPoint);
 
 app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
