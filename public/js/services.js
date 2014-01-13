@@ -10,7 +10,13 @@ gamemasterApp.service('EncounterData',function(){
 
 gamemasterApp.service('EncounterDataEdit',function(){
 	var data = null;
-	this.set = function(newData){data = newData;};
+	this.set = function(newData){
+		data = newData;
+		var bindableLoot = data.loot.map(function(item){
+			return {name: item};
+		});
+		data.loot = bindableLoot;
+	};
 	this.get = function(){return data;};
 });
 

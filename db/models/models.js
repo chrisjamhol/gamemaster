@@ -75,5 +75,7 @@ var Models = function(mongoose){
 	this.Foe = mongoose.model('Foe',foeSchema);
 	this.Chapter = mongoose.model('Chapter',chapterSchema);
 	this.StoryPoint = mongoose.model('StoryPoint',storypointSchema);
+	this.Helper = {};
+	this.Helper.newObjectId = mongoose.Types.ObjectId();
 };
 exports.do = function(mongoose){return new Models(mongoose);};

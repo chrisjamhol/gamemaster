@@ -17,7 +17,7 @@ section.encounterData(data-ng-show="encounter.name")
 		p Loot:
 		ul(data-ng-repeat="lootitem in encounter.loot")
 			li
-				input(type="text", size="40", value="{{lootitem}}", data-ng-model="lootitem")
-				button.deleteLoot.deleteButton.pure-button(data-ng-click="deleteLootItem(lootitem)") Delete
-		button.addLootItem.pure-button.addButton(data-ng-click="addLootItem()") Add Item
-		button.saveChangedLootButton.pure-button.saveButton(data-ng-click="saveEncounterChange('loot',encounter)") save Loot
+				input(type="text", size="40", value="{{lootitem.name}}", data-ng-model="lootitem.name")
+				button.deleteLoot.deleteButton.pure-button(data-ng-click="deleteLootItem($index,encounter)") Delete
+		button.addLootItem.pure-button.addButton(data-ng-click="addLootItem(encounter)") Add Item
+		button.saveChangedLootButton.pure-button.saveButton(data-ng-click="saveLoot(encounter)") save Loot

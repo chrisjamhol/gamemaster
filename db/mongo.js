@@ -3,6 +3,7 @@ var User = null;
 var Chapter = null;
 var Foe = null;
 var StoryPoint = null;
+var Helper = null;
 
 var init = function(mongoosePointer){
 	var Models = require('./models/models.js').do(mongoosePointer);
@@ -10,9 +11,10 @@ var init = function(mongoosePointer){
 	Chapter = Models.Chapter;
 	StoryPoint = Models.StoryPoint;
 	Foe = Models.Foe;
+	Helper = Models.Helper;
 
 	User.findQ = Q.nfbind(User.find.bind(User));
-	User.findOneQ = Q.nfbind(User.findOne.bind(User));   
+	User.findOneQ = Q.nfbind(User.findOne.bind(User));
 	Chapter.findQ = Q.nfbind(Chapter.find.bind(Chapter));
 	Chapter.findOneQ = Q.nfbind(Chapter.findOne.bind(Chapter));
 	StoryPoint.findQ = Q.nfbind(StoryPoint.find.bind(StoryPoint));
@@ -58,11 +60,11 @@ var newChapter = function(chapterData){
 						user.chapters.splice(chapterData.pos,0,chapter._id);
 					}else{
 						user.chapters.push(chapter._id);
-					}	
+					}
 					user.save(function(err,user){
 						if(err) throw err;
 						deferred.resolve(user.chapters);
-					});				
+					});
 				})
 				.done();
 		});
@@ -82,7 +84,7 @@ var deleteChapter = function(chapterData){
 						chapter.remove();
 						deferred.resolve(user);
 					})
-					.done();				
+					.done();
 			});
 		})
 		.done();
@@ -150,14 +152,14 @@ var newStoryPoint = function(storyPointData){
 					chapter.storyPoints.splice(storyPointData.pos,0,storyPoint._id);
 				}else{
 					chapter.storyPoints.push(chapter._id);
-				}	
+				}
 				chapter.save(function(err,chapter){
 					if(err) throw err;
 					deferred.resolve(chapter.storyPoints);
-				});	
+				});
 			})
 			.done();
-	});	
+	});
 	return deferred.promise;
 };
 
@@ -198,7 +200,50 @@ var deleteStoryPoint = function(storyPointData){
 						storypoint.remove();
 						deferred.resolve(chapter);
 					})
-					.done();				
+					.done();
+			});
+		})
+		.done();
+	return deferred.promise;
+};
+
+var saveLoot = function(change){
+	var deferred = Q.defer();
+	StoryPoint
+		.findOneQ({_id: change.storypointid})
+		.then(function(storypoint){
+			storypoint.loot = change.loot;
+			storypoint.save();
+			deferred.resolve(storypoint);
+		})
+		.done();
+	return deferred.promise;
+};
+
+var deleteLootItem = function(params){
+	var deferred = Q.defer();
+	StoryPoint
+		.findOneQ({_id: params.storypointid})
+		.then(function(storypoint){
+			storypoint.loot.splice(params.index,1);
+			storypoint.save(function(err,storypoint){
+				if(err) throw err;
+				deferred.resolve(storypoint);
+			});
+		})
+		.done();
+	return deferred.promise;
+};
+
+var addLootItem = function(storypointid){
+	var deferred = Q.defer();
+	StoryPoint
+		.findOneQ({_id: storypointid})
+		.then(function(storypoint){
+			storypoint.loot.push("");
+			storypoint.save(function(err,storypoint){
+				if(err) throw err;
+				deferred.resolve(storypoint);
 			});
 		})
 		.done();
@@ -207,19 +252,67 @@ var deleteStoryPoint = function(storyPointData){
 
 /* Foe */
 
-var addFoe = function(foeData,callback){
-	var newFoe = new Foe(foeData).save(function afterFoeAdd(err,foe){
-		if(err){console.log(err);}
-		else{callback(foe);}
-	});
-};
-
-var getFoes = function(storypointId){
+var saveFoe = function(foeData){
 	var deferred = Q.defer();
-
+	Foe
+		.findOneQ({_id: foeData._id})
+		.then(function(foe){
+			Object.keys(foeData).forEach(function(key){
+				foe[key] = foeData[key];
+			});
+			foe.save(function(err,newFoeData){
+				if(err) throw err;
+				deferred.resolve(newFoeData);
+			});
+		})
+		.done();
 	return deferred.promise;
 };
 
+var deleteFoe = function(foeData){
+	var deferred = Q.defer();
+	StoryPoint
+		.findOneQ({_id: foeData.storypointid})
+		.then(function(storypoint){
+			storypoint.foes.splice(foeData.index,1);
+			storypoint.save(function(err,storypoint){
+				if(err) throw err;
+				deferred.resolve(storypoint.foes);
+			});
+		})
+		.done();
+	return deferred.promise;
+};
+
+var deleteFoeAttack = function(attackData){
+	var deferred = Q.defer();
+	Foe
+		.findOneQ({_id: attackData.foeid})
+		.then(function(foe){
+			foe.attacks.splice(attackData.attackindex,1);
+			foe.save(function(err, foe){
+				if(err) throw err;
+				deferred.resolve(foe.attacks);
+			});
+		})
+		.done();
+	return deferred.promise;
+};
+
+var newFoeAttack = function(foeid){
+	var deferred = Q.defer();
+	Foe
+		.findOneQ({_id: foeid})
+		.then(function(foe){
+			foe.attacks.push({name: "",value: "",description: ""});
+			foe.save(function(err, foe){
+				if(err) throw err;
+				deferred.resolve(foe.attacks);
+			});
+		})
+		.done();
+	return deferred.promise;
+};
 
 /* Storyline */
 
@@ -239,8 +332,8 @@ var getStoryline = function(userid){
 								deferred.resolve(user.chapters);
 							}
 						);
-				});		
-		});	
+				});
+		});
 	return deferred.promise;
 };
 
@@ -263,8 +356,14 @@ module.exports = {
 	deleteStoryPoint: deleteStoryPoint,
 	putStoryPointData: putStoryPointData,
 
-	addFoe: addFoe,
-	getFoes: getFoes,
+	saveLoot: saveLoot,
+	deleteLootItem: deleteLootItem,
+	addLootItem: addLootItem,
+
+	saveFoe: saveFoe,
+	deleteFoe: deleteFoe,
+	deleteFoeAttack: deleteFoeAttack,
+	newFoeAttack: newFoeAttack,
 
 	addUser: addUser
 };

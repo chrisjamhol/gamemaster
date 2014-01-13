@@ -94,12 +94,19 @@ app.get('/api/getstoryline/:userid',api.getStoryline);
 app.put('/api/putchapternames',api.saveChapterNames);
 app.put('/api/putstorypointdata/',api.putStoryPointData);
 app.put('/api/saveencounterchange',api.saveEncounterChange);
+app.put('/api/saveloot',api.saveLoot);
+app.put('/api/addlootitem/:storypointid',api.addLootItem);
+app.put('/api/savefoe',api.saveFoe);
+app.put('/api/newfoeattack/:foeid',api.newFoeAttack);
 
 app.post('/api/newchapter',api.newChapter);
 app.post('/api/newstorypoint',api.newStoryPoint);
 
 app.delete('/api/deletechapter/:userid/:chapterid',api.deleteChapter);
 app.delete('/api/deletestorypoint/:storypointid/:chapterid',api.deleteStoryPoint);
+app.delete('/api/deletelootitem/:index/:storypointid',api.deleteLootItem);
+app.delete('/api/deletefoe/:index/:storypointid',api.deleteFoe);
+app.delete('/api/deletefoeattack/:attackindex/:foeid',api.deleteFoeAttack);
 
 app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);

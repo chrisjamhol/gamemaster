@@ -44,15 +44,15 @@ div.foeData.foeDataEdit.pure-g
 				tr(data-ng-repeat="(key,val) in foe.attrs")
 					td {{key}}
 					td
-						input(type="number", size="5", value="{{val}}", data-ng-model="foe.attrs[val]")
+						input(type="number", size="5", value="{{val}}", data-ng-model="foe.attrs[key]")
 div.foeAttackEdit(data-ng-repeat="attack in foe.attacks" data-foeattack)
-button.addAttack.addButton.pure-button(data-ng-click="addAttack") Add Attack
+button.addAttack.addButton.pure-button(data-ng-click="addAttack($index,foe)") Add Attack
 div.foeNotes
 	p Notes
 	input(type="text",value="{{foe.notes}}", data-ng-model="foe.notes")
 div.foeActionButtons
-	button.saveFoe.pure-button.saveButton(data-ng-click="saveEncounterChange('foe',encounter)") Save Foe
-	button.deleteFoe.pure-button.deleteButton(data-ng-click="deleteFromEncounter('foe',encounter)") Delete Foe
+	button.saveFoe.pure-button.saveButton(data-ng-click="saveFoe(foe)") Save Foe
+	button.deleteFoe.pure-button.deleteButton(data-ng-click="deleteFoe($index)") Delete Foe
 
 
 

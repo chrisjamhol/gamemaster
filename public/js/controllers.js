@@ -79,7 +79,7 @@ gamemasterApp.controller('editStorylineController',
 								.success(function(data, status, headers, config){
 									$scope.chapters = data;
 								})
-								.error(httpErrorHandler);							
+								.error(httpErrorHandler);
 					})
 					.error(httpErrorHandler);
 			}
@@ -112,7 +112,7 @@ gamemasterApp.controller('editStorylineController',
 								.success(function(data, status, headers, config){
 									$scope.chapters = data;
 								})
-								.error(httpErrorHandler);							
+								.error(httpErrorHandler);
 					})
 					.error(httpErrorHandler);
 			}
@@ -150,6 +150,10 @@ gamemasterApp.controller('editEncounterController',
 				console.log(encData);
 			});
 
+			$scope.$watch($scope.encounter,function(change){
+				console.log(change);
+			});
+
 			$scope.saveEncounterChange = function(changed,encounter){
 				var changedData = {
 					change: {
@@ -163,11 +167,92 @@ gamemasterApp.controller('editEncounterController',
 
 				$http.put('/api/putstorypointdata/',changedData)
 					.success(function(data, status, headers, config){
-
+						console.log("saved "+changedData.change.key);
 					})
 					.error(httpErrorHandler);
-			}
+			};
 
-			$scope.putStoryPointData
+			$scope.saveLoot = function(encounter){
+				var changed = {
+					storypointid: encounter._id,
+					loot: fromBindable(encounter.loot)
+				};
+
+				$http.put('/api/saveLoot',changed)
+					.success(function(){
+						console.log("saved Loot");
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.deleteLootItem = function(index,encounter){
+				$http.delete('/api/deletelootitem/'+index+"/"+encounter._id)
+					.success(function(storypoint){
+						EncounterDataEdit.set(storypoint);
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.addLootItem = function(encounter){
+				$http.put('/api/addlootitem/'+encounter._id)
+					.success(function(storypoint){
+						$scope.encounter.loot = toBindable(storypoint.loot);
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.saveFoe = function(foe){
+				$http.put('/api/savefoe',foe)
+					.success(function(newFoeData){
+						foe = newFoeData;
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.addFoe = function(encounter){
+				$http.post('/api/newFoe/'+encounter._id)
+					.success(function(foes){
+						$scope.encounter.foes = foes;
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.deleteFoe = function(index,encounter){
+				$http.delete('/api/deletefoe/'+index+'/'+$scope.encounter._id)
+					.success(function(foes){
+						$scope.encounter.foes = foes;
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.deleteAttack = function(attackindex,foeindex,foe){
+				$http.delete('/api/deletefoeattack/'+attackindex+'/'+foe._id)
+					.success(function(attacks){
+						$scope.encounter.foes[foeindex].attacks = attacks;
+					})
+					.error(httpErrorHandler);
+			};
+
+			$scope.addAttack = function(index,foe){
+				$http.put('/api/newfoeattack/'+foe._id)
+					.success(function(attacks){
+						$scope.encounter.foes[index].attacks = attacks;
+					})
+					.error(httpErrorHandler);
+			};
 		}
 	]);
+
+/* helpers */
+var toBindable = function(array){
+	console.log(array);
+	return array.map(function(item){
+		return {name: item};
+	});
+};
+
+var fromBindable = function(object){
+	return object.map(function(item){
+		return item.name;
+	});
+};
